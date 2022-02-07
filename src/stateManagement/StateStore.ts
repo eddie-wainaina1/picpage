@@ -1,4 +1,3 @@
-import { Connect } from "react-redux";
 //structure
 // state has an array of objects from api of the form
 /*

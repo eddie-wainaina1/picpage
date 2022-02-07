@@ -6,5 +6,6 @@ export default async function picAPI(){
     const data = await res.json();
     return data
 }
-let data = picAPI().then(dt=>dt).catch(e=>e);
-console.log(data);
+
+const data = await picAPI()
+console.log(data)

@@ -8,7 +8,7 @@ import { addPic } from "../stateManagement/actions";
 export const ListContainer = ()=> {
     useEffect(() => {
         (async()=>{
-            let data = await picAPI();
+            let data:any = await picAPI();
             for (let i in data){
                 store.dispatch(addPic(data[i]))
             }
