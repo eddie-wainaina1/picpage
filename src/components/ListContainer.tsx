@@ -1,9 +1,19 @@
 import Picture from "./Picture"; 
 import picAPI from "../resources/picAPI";
-import { ListProps } from "./interfaces";
+// import { ListProps } from "./interfaces";
 import store from "../stateManagement/StateStore";
+import { useEffect } from "react";
+import { addPic } from "../stateManagement/actions";
 
-const ListContainer = (props:ListProps)=> {
+export const ListContainer = ()=> {
+    useEffect(() => {
+        (async()=>{
+            let data = await picAPI();
+            for (let i in data){
+                store.dispatch(addPic(data[i]))
+            }
+        })();
+    }, [])
     const appState = store.getState();
     return(
         <div>

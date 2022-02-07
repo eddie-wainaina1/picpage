@@ -15,7 +15,7 @@ export default function Picture(props:PictureProps){
     }, [storeValue]);
     return(
         <div id = {props.id.toString()}>
-            <img src={props.thumbnailUrl}></img>
+            <img src={props.thumbnailUrl} alt=""></img>
             <div id={props.id + "Label"}>{title}</div>
             <div>{Date.now()}</div>
         </div>

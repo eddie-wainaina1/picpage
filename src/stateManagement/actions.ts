@@ -13,7 +13,7 @@ export const addPic = (pic:PictureProps)=> ({
         pic
     }
 })
-export const clickLabel = (id)=> ({
+export const clickLabel = (id:number)=> ({
     type: CLICK_LABEL,
     payload: {
         id
@@ -24,7 +24,7 @@ export const clickOutside = ()=> ({
     type: CLICK_OUTSIDE
 })
 
-export const updateLabel = (id,newTitle)=> ({
+export const updateLabel = (id:number,newTitle:string)=> ({
     type: UPDATE_LABEL,
     payload: {
         id,newTitle
