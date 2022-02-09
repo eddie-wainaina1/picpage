@@ -5,7 +5,7 @@ export interface PictureProps {
     thumbnailUrl: string 
     title: string 
 }
-export interface stateInterface {
+export interface StateInterface {
     selectedId: number | null
     data: PictureProps[] | []
 }
