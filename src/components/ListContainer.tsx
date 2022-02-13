@@ -1,27 +1,36 @@
 import Picture from "./Picture"; 
 // import picAPI from "../resources/picAPI";
-import { StateInterface,PictureProps } from "./interfaces";
-import store from "../stateManagement/StateStore";
-import { useEffect } from "react";
-import { addPic,clickLabel,clickOutside,updateLabel } from "../stateManagement/actions";
+import { CircularProgress } from "@mui/material"
+import { StateInterface, PictureInterface } from "./interfaces";
+import { addPic,addPics,clickLabel,clickOutside,updateLabel } from "../stateManagement/actions";
 
 import { connect } from "react-redux";
+import { useEffect, useState } from "react";
 
 const LiContainer = (props:any)=> {
-    const url = "https://jsonplaceholder.typicode.com/photos"
-    useEffect(() => {
+    const [arepicsLoading, setArePicsLoading] = useState(false);
+    const addPics = props.addPics
+    useEffect(()=>{
+        setArePicsLoading(true);
+        const url = "https://jsonplaceholder.typicode.com/photos";
         (async()=>{
-            console.log("Entering effect")
-            let res = await fetch(url)
-            let data = await res.json
-            console.log(data);
+            console.log("async fetch")
+            const res = await fetch(url);
+            const data = await res.json();
+            setArePicsLoading(false);
+            addPics(data.slice(0));
+            console.log("done async fetch");
         })();
-    }, [])
+
+    },[addPics])
+    console.log(props);
     return(
-        <div>
+        <div id="listContainer">
             {
-                store.getState().data.length?store.getState().data.map((pic:PictureProps)=><li><Picture {...pic}/></li>)
-                : <div> <strong>No Objects In State</strong> </div>
+                // props.data.map((i:PictureInterface)=><div>{i.title}</div>)
+                props.data.length && !arepicsLoading?
+                props.data.map((pic:PictureInterface)=><Picture pic={pic} key={pic.id}/>)
+                : <div> <CircularProgress color="inherit" className="Loading"/><br/>Loading Pictures... </div>
             }
         </div>
     )
@@ -33,7 +42,8 @@ function mapStateToProps(state:StateInterface){
 
 function mapDispatchToProps(dispatch:Function){
     return {
-        addPic: (pic:PictureProps)=>dispatch(addPic(pic)),
+        addPics: (pics:PictureInterface[])=>dispatch(addPics(pics)),
+        addPic: (pic:PictureInterface)=>dispatch(addPic(pic)),
         clickLabel: (id:number)=>dispatch(clickLabel(id)),
         clickOutside : ()=>dispatch(clickOutside()),
         updateLabel : (id:number,newTitle:string)=>dispatch(updateLabel(id,newTitle))

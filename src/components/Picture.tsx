@@ -1,24 +1,20 @@
-import { useEffect } from 'react';
-import store from '../stateManagement/StateStore';
-import { PictureProps } from './interfaces';
+import React from "react"
+import styled from "styled-components"
+const Div = styled.div`
+    margin: 3px;
+    border-radius: 10px;
+    background-color: ${(props:any)=>parseInt(props.id)%2===0?"#D3D3D3":"white"};
+    color: ${(props:any)=>parseInt(props.id)%2===0 && "white"};
+`z
 
-export default function Picture(props:PictureProps){
-    const storeValue = store.getState().data[props.id]
-    let title = storeValue.title
-    useEffect(() => {
-        const unsubscribe = store.subscribe(()=>{
-            
-        })
-        return () => {
-            unsubscribe();
-        }
-    }, [storeValue]);
+export default function Picture(props:any){
+
     return(
-        <div id = {props.id.toString()}>
-            <img src={props.thumbnailUrl} alt=""></img>
-            <div id={props.id + "Label"}>{title}</div>
+        <Div id = {props.pic.id.toString()} className="Picture">
+            <img src={props.pic.thumbnailUrl} alt=""></img>
+            <div id={props.pic.id + "Label"} className="Label" onClick={()=>{console.log("clicked")}}>{props.pic.title}</div>
             <div>{Date.now()}</div>
-        </div>
-    )
+        </Div>
+    )  
 }
 
