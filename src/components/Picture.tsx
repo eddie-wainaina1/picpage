@@ -1,11 +1,11 @@
-import React from "react"
-import styled from "styled-components"
+import styled from "styled-components";
+
 const Div = styled.div`
     margin: 3px;
     border-radius: 10px;
     background-color: ${(props:any)=>parseInt(props.id)%2===0?"#D3D3D3":"white"};
     color: ${(props:any)=>parseInt(props.id)%2===0 && "white"};
-`z
+`
 
 export default function Picture(props:any){
 
