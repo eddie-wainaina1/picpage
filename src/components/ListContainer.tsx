@@ -22,14 +22,17 @@ const LiContainer = (props:any)=> {
             console.log("done async fetch");
         })();
 
-    },[addPics])
+    },[addPics]);
+    
     console.log(props);
     return(
         <div id="listContainer">
             {
-                // props.data.map((i:PictureInterface)=><div>{i.title}</div>)
                 props.data.length && !arepicsLoading?
-                props.data.map((pic:PictureInterface)=><Picture pic={pic} key={pic.id}/>)
+                props.data.map((pic:PictureInterface)=><Picture 
+                    pic={pic} 
+                    key={pic.id}
+                    updateLabel = {props.updateLabel}/>)
                 : <div> <CircularProgress color="inherit" className="Loading"/><br/>Loading Pictures... </div>
             }
         </div>
