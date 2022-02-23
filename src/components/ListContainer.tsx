@@ -33,7 +33,7 @@ const LiContainer = (props:any)=> {
                     pic={pic} 
                     key={pic.id}
                     updateLabel = {props.updateLabel}/>)
-                : <div> <CircularProgress color="inherit" className="Loading"/><br/>Loading Pictures... </div>
+                : <div style={{height:"1200px"}}> <CircularProgress color="inherit" className="Loading"/><br/>Loading Pictures... </div>
             }
         </div>
     )
